@@ -38,7 +38,7 @@ const pizzaController = {
 	},
 
 	// update pizza by id
-	updatPizza({ params, body }, res) {
+	updatePizza({ params, body }, res) {
 		Pizza.findOneAndUpdate({ _id: params.id }, body, { new: true })
 			.then((dbPizzaData) => {
 				if (!dbPizzaData) {
@@ -60,6 +60,7 @@ const pizzaController = {
 			.then((dbPizzaData) => {
 				if (!dbPizzaData) {
 					res.json(404).json({ message: "No pizza dound with this id" });
+					return;
 				}
 
 				res.json(200).json(dbPizzaData);
