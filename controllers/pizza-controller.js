@@ -53,6 +53,22 @@ const pizzaController = {
 				res.status(400).json(err);
 			});
 	},
+
+	// delete pizza
+	deletePizza({ params }, res) {
+		Pizza.findOneAndDelete({ _id: params.id })
+			.then((dbPizzaData) => {
+				if (!dbPizzaData) {
+					res.json(404).json({ message: "No pizza dound with this id" });
+				}
+
+				res.json(200).json(dbPizzaData);
+			})
+			.catch((err) => {
+				console.log(err);
+				res.status(400).json(err);
+			});
+	},
 };
 
 module.exports = pizzaController;
